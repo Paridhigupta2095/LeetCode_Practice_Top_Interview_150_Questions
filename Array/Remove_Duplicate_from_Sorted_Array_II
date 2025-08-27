@@ -1,0 +1,50 @@
+from typing import List
+
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        i = 0
+        j = 1
+        n = len(nums)
+        count = 0
+
+        while j < n:
+            if nums[i] == nums[j] and count == 0:
+                count = 2
+                i += 1
+                nums[i] = nums[j]
+                j += 1
+            elif nums[i] == nums[j] and count == 2:
+                j += 1
+            elif nums[i] != nums[j] and count == 2:
+                count = 0
+                i += 1
+                nums[i] = nums[j]
+                j += 1
+            else:
+                i += 1
+                nums[i] = nums[j]
+                j += 1
+        return i + 1
+
+
+# -------- Driver Code --------
+if __name__ == "__main__":
+    solution = Solution()
+
+    # Example test cases
+    test_cases = [
+        [1,1,1,2,2,3],
+        [0,0,1,1,1,1,2,3,3],
+        [1,2,3],
+        [1,1,2],
+        [1,1,1,1,2,2,2],
+        []
+    ]
+
+    for nums in test_cases:
+        arr = nums[:]  # copy to avoid in-place overwrite for next run
+        length = solution.removeDuplicates(arr)
+        print("Original:", nums)
+        print("Length after removing duplicates:", length)
+        print("Array after removing duplicates:", arr[:length])
+        print("-" * 40)
