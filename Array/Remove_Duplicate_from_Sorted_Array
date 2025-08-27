@@ -1,0 +1,31 @@
+from typing import List
+
+class Solution: 
+    def removeDuplicates(self, nums: List[int]) -> int:
+        i = 0
+        j = 1
+        n = len(nums)
+
+        if n == 1:
+            return 1
+
+        while j < n:
+            if nums[i] == nums[j]:
+                j += 1
+            elif nums[i] != nums[j]:
+                i += 1
+                nums[i] = nums[j]
+                j += 1
+        return i + 1
+
+
+# -------- Driver Code --------
+if __name__ == "__main__":
+    solution = Solution()
+
+    # Example test case
+    nums = [0,0,1,1,1,2,2,3,3,4]
+    length = solution.removeDuplicates(nums)
+
+    print("Length after removing duplicates:", length)
+    print("Array after removing duplicates:", nums[:length])
