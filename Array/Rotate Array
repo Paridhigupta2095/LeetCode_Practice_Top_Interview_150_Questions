@@ -1,0 +1,37 @@
+from typing import List
+
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        k = k % n
+
+        start_idx = 0
+        count = 0
+
+        while count < n:
+            current_idx = start_idx
+            prev_value = nums[start_idx]
+
+            while True:
+                next_idx = (current_idx + k) % n
+                nums[next_idx], prev_value = prev_value, nums[next_idx]
+                current_idx = next_idx
+                count += 1
+                if start_idx == current_idx:
+                    break
+            start_idx += 1
+
+
+# -------- Driver function --------
+def main():
+    nums = [-1, -100, 3, 99]
+    k = 2
+    print("Original:", nums)
+    Solution().rotate(nums, k)
+    print("Rotated:", nums)
+
+if __name__ == "__main__":
+    main()
