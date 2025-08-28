@@ -1,0 +1,40 @@
+from typing import List
+
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        #Solution 1
+        c=-1
+        count=0
+        s=s.strip()
+
+        while s[c]!=" ":
+            c=c-1
+            count=count+1
+            if count==len(s):
+                break   
+
+        return count
+        # Solution:2
+        # words=s.strip().split()
+        # print(words)
+        # if not s:
+        #     return 0
+        # return len(words[-1])
+    
+
+
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+    test_cases = [
+        "Hello World",
+        "   fly me   to   the moon  ",
+        "luffy is still joyboy",
+        "a",
+        "   ",   # only spaces
+        ""
+    ]
+
+    for s in test_cases:
+        print(f"Input: '{s}' | Length of last word: {sol.lengthOfLastWord(s)}")
+
