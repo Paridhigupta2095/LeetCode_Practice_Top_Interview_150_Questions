@@ -1,0 +1,27 @@
+from collections import Counter
+
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        s1 = Counter(s)
+        s2 = Counter(t)
+
+        for i in s2.keys():
+            if s2[i] - s1[i] != 0:
+                return False
+            else:
+                s1.pop(i)
+        for i in s1.keys():
+            return False
+        return True
+
+
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+    
+    # Test cases
+    print(sol.isAnagram("anagram", "nagaram"))  # Expected: True
+    print(sol.isAnagram("rat", "car"))          # Expected: False
+    print(sol.isAnagram("listen", "silent"))    # Expected: True
+    print(sol.isAnagram("", ""))                # Expected: True
+    print(sol.isAnagram("a", "ab"))  
