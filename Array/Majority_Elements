@@ -1,0 +1,18 @@
+from collections import Counter
+from typing import List
+
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        # Using Counter to find majority element
+        a = Counter(nums)
+        n = len(nums)
+        for i in a.keys():
+            if a[i] > n/2:
+                return i
+
+# Driver code
+if __name__ == "__main__":
+    nums = [2, 2, 1, 1, 1, 2, 2]
+    sol = Solution()
+    result = sol.majorityElement(nums)
+    print("Majority Element is:", result)
