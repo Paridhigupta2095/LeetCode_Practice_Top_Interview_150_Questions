@@ -1,0 +1,30 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        # Using your compact version
+        words= s.strip().split()
+        i=len(words)-1
+        op=""
+        while i>=0:
+            op+=words[i]
+            if i!=0:
+                op+=" "
+            i=i-1
+        return op
+        #Approach2
+        #	return " ".join(reversed(s.split()))
+
+# ----------------- Driver Code -----------------
+if __name__ == "__main__":
+    sol = Solution()
+    
+    test_cases = [
+        "Hello World",
+        "  Python is fun  ",
+        "a b c d",
+        "SingleWord"
+    ]
+    
+    for s in test_cases:
+        print(f"Original: '{s}'")
+        print(f"Reversed: '{sol.reverseWords(s)}'")
+        print("-" * 30)
