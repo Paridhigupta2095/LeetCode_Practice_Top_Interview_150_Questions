@@ -1,0 +1,35 @@
+from typing import List
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        s_nums = sorted(nums)
+        n = len(nums)
+        seen = set()
+        result = set()
+        for i in range(0, n - 2):
+            if s_nums[i] not in seen:
+                seen.add(s_nums[i])
+                low = i + 1
+                high = n - 1
+
+                while low < high:
+                    if s_nums[low] + s_nums[high] == -1 * s_nums[i]:
+                        result.add((s_nums[i], s_nums[low], s_nums[high]))
+                        low += 1
+                        high -= 1
+                    elif s_nums[low] + s_nums[high] < -s_nums[i]:
+                        low += 1
+                    else:
+                        high -= 1
+            else:
+                i += 1
+        l_result = [list(x) for x in result]
+        return l_result
+
+
+# Driver code
+if __name__ == "__main__":
+    nums = [-1, 0, 1, 2, -1, -4]
+    obj = Solution()
+    print("Input:", nums)
+    print("Triplets summing to zero:", obj.threeSum(nums))
