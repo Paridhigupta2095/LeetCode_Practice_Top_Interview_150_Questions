@@ -1,0 +1,28 @@
+from typing import List
+
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        if len(nums) == 1:
+            return True
+        curr_runway = nums[0]
+        for i in range(1, len(nums)):
+            curr_runway -= 1
+            if curr_runway < 0:
+                return False
+            curr_runway = max(curr_runway, nums[i])
+        return True
+
+
+# 🚀 Driver code
+if __name__ == "__main__":
+    test_cases = [
+        [2, 3, 1, 1, 4],  # Expected True
+        [3, 2, 1, 0, 4],  # Expected False
+        [0],              # Expected True (already at last index)
+        [1, 0, 1, 0],     # Expected False
+        [2, 0, 0]         # Expected True
+    ]
+    
+    obj = Solution()
+    for nums in test_cases:
+        print(f"Input: {nums} -> Can reach end? {obj.canJump(nums)}")
