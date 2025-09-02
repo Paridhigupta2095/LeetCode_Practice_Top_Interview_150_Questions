@@ -21,6 +21,30 @@ class Solution:
                     c=int(b/a)   # integer division
                 stack.append(c)
         return stack[-1]
+        #Approach 2:
+        operations={
+        #     "+" : lambda a,b: a+b,
+        #     "-" : lambda a,b: a-b,
+        #     "*" : lambda a,b: a*b,
+        #     "/" : lambda a,b: int(a)/ int(b)
+        #     }
+        # n=len(tokens)
+        # i=0
+        # while len(tokens) > 1:
+        #     while tokens[i] not in ('+','-','/','*') :
+        #             i+=1
+        
+        #     op=operations[tokens[i]]
+        #     a=int(tokens[i-2])
+        #     b=int(tokens[i-1])
+        #     r=op(a,b)
+
+        #     tokens[i]=r
+        #     tokens.pop(i-2)
+        #     tokens.pop(i-2)
+        #     i=0
+        
+        # return int(tokens[0])
 
 
 if __name__ == "__main__":
