@@ -1,0 +1,26 @@
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        stack = []
+        dir = path.split("/")
+        
+        for i in dir:
+            if i == ".." and stack:
+                stack.pop()
+            elif i == "." or i == "" or (i == ".." and not stack):
+                continue
+            else:
+                stack.append(i)
+        
+        r = "/".join(stack)
+        return "/" + r
+
+
+# Driver method
+if __name__ == "__main__":
+    obj = Solution()
+    
+    # Test cases
+    print(obj.simplifyPath("/home/"))            # Output: "/home"
+    print(obj.simplifyPath("/../"))              # Output: "/"
+    print(obj.simplifyPath("/home//foo/"))       # Output: "/home/foo"
+    print(obj.simplifyPath("/a/./b/../../c/"))   # Output: "/c"
