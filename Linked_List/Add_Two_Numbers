@@ -1,0 +1,72 @@
+from typing import Optional
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+class Solution:
+    def addNode(self, head: ListNode, l3: Optional[ListNode]) -> Optional[ListNode]:  
+        if head is None:
+            head = l3
+        else:
+            h = head
+            while h.next:
+                h = h.next
+            h.next = l3
+        return head
+
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        head = None
+        carry = 0
+        while l1 is not None or l2 is not None:
+            v1 = l1.val if l1 else 0
+            v2 = l2.val if l2 else 0
+            t = carry + v1 + v2
+            if t >= 10:
+                carry = 1
+                t = t % 10
+            else:
+                carry = 0
+            if l1: l1 = l1.next
+            if l2: l2 = l2.next
+
+            head = self.addNode(head, ListNode(t, None))
+                    
+        if carry != 0:
+            head = self.addNode(head, ListNode(carry, None))
+        return head
+
+# Helper function to create linked list from a list
+def create_linked_list(arr):
+    if not arr:
+        return None
+    head = ListNode(arr[0])
+    current = head
+    for val in arr[1:]:
+        current.next = ListNode(val)
+        current = current.next
+    return head
+
+# Helper function to print linked list
+def print_linked_list(head):
+    res = []
+    while head:
+        res.append(head.val)
+        head = head.next
+    print(res)
+
+# Driver code
+if __name__ == "__main__":
+    l1_list = [2, 4, 3]  # Represents number 342
+    l2_list = [5, 6, 4]  # Represents number 465
+    
+    l1 = create_linked_list(l1_list)
+    l2 = create_linked_list(l2_list)
+    
+    solution = Solution()
+    result = solution.addTwoNumbers(l1, l2)
+    
+    print("Sum Linked List:")
+    print_linked_list(result)
