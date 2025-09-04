@@ -1,0 +1,79 @@
+from typing import Optional
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if head is None or head.next is None:
+            return 0
+        s = head
+        f = head.next
+
+        cycle = 1
+
+        while s != f:
+            s = s.next
+            if f is None or f.next is None or f.next.next is None:
+                cycle = 0
+                break
+            f = f.next.next
+
+        return cycle
+
+
+# Helper: Create linked list from list (no cycle)
+def create_linked_list(arr):
+    if not arr:
+        return None
+    head = ListNode(arr[0])
+    curr = head
+    for val in arr[1:]:
+        curr.next = ListNode(val)
+        curr = curr.next
+    return head
+
+# Helper: Create a cycle in the linked list at position pos (0-indexed)
+def create_cycle(head, pos):
+    if pos == -1:
+        return head
+    cycle_node = None
+    curr = head
+    idx = 0
+    tail = None
+    while curr:
+        if idx == pos:
+            cycle_node = curr
+        tail = curr
+        curr = curr.next
+        idx += 1
+    if tail and cycle_node:
+        tail.next = cycle_node
+    return head
+
+
+# Driver code
+if __name__ == "__main__":
+    solution = Solution()
+
+    # Test 1: List with no cycle
+    l1 = create_linked_list([3, 2, 0, -4])
+    print("Cycle in list 1:", solution.hasCycle(l1))  # Expected 0
+
+    # Test 2: List with cycle (pos = 1 → cycle at node with value 2)
+    l2 = create_linked_list([3, 2, 0, -4])
+    l2 = create_cycle(l2, 1)
+    print("Cycle in list 2:", solution.hasCycle(l2))  # Expected 1
+
+    # Test 3: Single node without cycle
+    l3 = create_linked_list([1])
+    print("Cycle in list 3:", solution.hasCycle(l3))  # Expected 0
+
+    # Test 4: Single node with cycle (pos = 0)
+    l4 = create_linked_list([1])
+    l4 = create_cycle(l4, 0)
+    print("Cycle in list 4:", solution.hasCycle(l4))  # Expected 1)
+
