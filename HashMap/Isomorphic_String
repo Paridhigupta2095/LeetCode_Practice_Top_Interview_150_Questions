@@ -1,0 +1,49 @@
+from collections import Counter
+
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        if len(s) != len(t):
+            return False
+        
+        mapping = dict()
+
+        for i in range(len(s)):
+            if s[i] not in mapping.keys():
+                if t[i] not in mapping.values():
+                    mapping[s[i]] = t[i]
+                else:
+                    return False
+            else:
+                if mapping[s[i]] != t[i]:
+                    return False
+        return True
+
+
+# ---------------- Driver Code ----------------
+if __name__ == "__main__":
+    sol = Solution()
+
+    # Example 1
+    s1, t1 = "egg", "add"
+    print(f"Input: s = {s1}, t = {t1}")
+    print("Isomorphic?", sol.isIsomorphic(s1, t1))  # Expected True
+
+    # Example 2
+    s2, t2 = "foo", "bar"
+    print(f"\nInput: s = {s2}, t = {t2}")
+    print("Isomorphic?", sol.isIsomorphic(s2, t2))  # Expected False
+
+    # Example 3
+    s3, t3 = "paper", "title"
+    print(f"\nInput: s = {s3}, t = {t3}")
+    print("Isomorphic?", sol.isIsomorphic(s3, t3))  # Expected True
+
+    # Example 4
+    s4, t4 = "bbbaaaba", "aaabbbba"
+    print(f"\nInput: s = {s4}, t = {t4}")
+    print("Isomorphic?", sol.isIsomorphic(s4, t4))  # Expected False
+
+    # Example 5 (edge case: empty strings)
+    s5, t5 = "", ""
+    print(f"\nInput: s = {s5}, t = {t5}")
+    print("Isomorphic?", sol.isIsomorphic(s5, t5))  # Expected True
