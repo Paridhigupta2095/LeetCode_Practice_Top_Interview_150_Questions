@@ -1,0 +1,50 @@
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+# Your Solution class stays unchanged
+class Solution:
+    def countNodes(self, root: TreeNode) -> int:
+        if root is None:
+            return 0
+        else:
+            return 1 + self.countNodes(root.left) + self.countNodes(root.right)
+
+
+# -------- Helper function to print tree in level order --------
+def print_tree(root):
+    if not root:
+        return []
+    from collections import deque
+    q = deque([root])
+    result = []
+    while q:
+        node = q.popleft()
+        if node:
+            result.append(node.val)
+            q.append(node.left)
+            q.append(node.right)
+        else:
+            result.append(None)
+    while result and result[-1] is None:
+        result.pop()
+    return result
+
+
+# -------- DRIVER CODE --------
+if __name__ == "__main__":
+    # Build example tree: [1,2,3,4,5,6]
+    root = TreeNode(1)
+    root.left = TreeNode(2, TreeNode(4), TreeNode(5))
+    root.right = TreeNode(3, TreeNode(6))
+
+    print("Tree:", print_tree(root))
+
+    sol = Solution()
+    count = sol.countNodes(root)
+
+    print("Number of nodes:", count)
+
