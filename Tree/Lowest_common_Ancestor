@@ -1,0 +1,69 @@
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+
+class Solution:
+    def find(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> bool:
+        if root is None:
+            return False
+
+        left = self.find(root.left, p, q)
+        right = self.find(root.right, p, q)
+
+        if (root.val == p.val or root.val == q.val) and (left is True or right is True):
+            r.val = root.val
+            return
+        elif (root.val == p.val or root.val == q.val):
+            return True
+
+        if left and right:
+            r.val = root.val
+        elif left or right:
+            return True
+        else:
+            return False
+
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        global r
+        r = TreeNode(None)
+        self.find(root, p, q)
+        return r
+
+
+# ---------------- DRIVER CODE ---------------- #
+
+# Build the binary tree
+root = TreeNode(3)
+root.left = TreeNode(5)
+root.right = TreeNode(1)
+root.left.left = TreeNode(6)
+root.left.right = TreeNode(2)
+root.right.left = TreeNode(0)
+root.right.right = TreeNode(8)
+root.left.right.left = TreeNode(7)
+root.left.right.right = TreeNode(4)
+
+# Create Solution object
+sol = Solution()
+
+# Example 1: Find LCA of nodes 5 and 1
+p = root.left         # Node with value 5
+q = root.right        # Node with value 1
+ans = sol.lowestCommonAncestor(root, p, q)
+print("LCA of 5 and 1:", ans.val if ans else None)
+
+# Example 2: Find LCA of nodes 6 and 4
+p = root.left.left    # Node with value 6
+q = root.left.right.right  # Node with value 4
+ans = sol.lowestCommonAncestor(root, p, q)
+print("LCA of 6 and 4:", ans.val if ans else None)
+
+# Example 3: Find LCA of nodes 7 and 8
+p = root.left.right.left   # Node with value 7
+q = root.right.right       # Node with value 8
+ans = sol.lowestCommonAncestor(root, p, q)
+print("LCA of 7 and 8:", ans.val if ans else None)
