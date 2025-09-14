@@ -1,0 +1,22 @@
+
+class Solution:
+    def trailingZeroes(self, n: int) -> int:
+        
+        r=0
+
+        poweroffive=5
+        while(n//poweroffive!=0):
+            r+=n//poweroffive
+            poweroffive*=5
+
+        return r
+
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+
+    # Test cases
+    test_cases = [5, 10, 30, 100, 125, 200]
+    for n in test_cases:
+        print(f"Trailing zeros in {n}! = {sol.trailingZeroes(n)}")
+
