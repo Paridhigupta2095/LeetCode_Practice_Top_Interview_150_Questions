@@ -1,0 +1,30 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        sym_val = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50,
+            "C": 100,
+            "D": 500,
+            "M": 1000,
+        }
+        total = 0
+        i = 0
+        while i < len(s):
+            if i + 1 < len(s) and sym_val[s[i+1]] > sym_val[s[i]]:
+                total += sym_val[s[i+1]] - sym_val[s[i]]
+                i += 2
+            else:
+                total += sym_val[s[i]]
+                i += 1
+        return total
+
+
+# 🚀 Driver code
+if __name__ == "__main__":
+    sol = Solution()
+    
+    test_cases = ["III", "LVIII", "MCMXCIV", "IX", "XL", "CD"]
+    for roman in test_cases:
+        print(f"{roman} -> {sol.romanToInt(roman)}")
