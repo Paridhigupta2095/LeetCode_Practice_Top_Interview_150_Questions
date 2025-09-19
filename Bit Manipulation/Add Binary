@@ -1,0 +1,92 @@
+
+
+class Solution:
+    # #Approach 1
+    # def sumBit(self,num1:str,num2:str)->str:
+    #     global carry
+
+    #     if num1=='1' and num2 =='1' and carry=='0':
+    #         resultbit='0'
+    #         carry='1'  
+    #     elif num1=='1' and num2 =='1' and carry=='1':
+    #         resultbit='1'
+    #         carry='1'
+    #     elif num1=='0' and num2 =='0': 
+    #         resultbit=carry  
+    #         carry='0'
+    #     elif (num1=='0' or num2 =='0') and carry=='1' :
+    #         resultbit='0'
+    #         carry='1'   
+    #     elif (num1=='0' or num2 =='0') and carry=='0':
+    #         resultbit='1'
+    #         carry='0'
+    #     return resultbit
+    
+    # def addBinary(self, a: str, b: str) -> str:
+    #     lena=len(a)
+    #     lenb=len(b)
+    #     global carry
+    #     carry='0'
+    #     result=['0']*(lena+1 if lena>lenb else lenb+1)
+    #     n=len(result)
+
+    #     i=1
+    #     while (lena-i>-1 or lenb-i>-1):
+    #         if lena-i<=-1:
+    #             num1='0'
+    #         else:
+    #             num1=a[lena-i]
+            
+    #         if lenb-i<=-1:
+    #             num2='0'
+    #         else:
+    #             num2=b[lenb-i]
+    #         print("num1",num1,"num2",num2)
+    #         print("carry=",carry)
+
+    #         result[n-i]= self.sumBit(num1,num2)
+    #         print(result[n-i])
+    #         i+=1
+       
+    #     result[0]= carry
+    #     if carry=='0':
+    #         j=1
+    #     else:
+    #         j=0
+    #     print("result",result)   
+        
+    #     r=''.join(result[j:n])
+    #     return r
+
+    #Approach2 - using addition and %2 by 2
+    def addBinary(self, a: str, b: str) -> str:
+        maxlen= len(a) if len(a)>len(b) else len(b)
+        a=a.zfill(maxlen)
+        b=b.zfill(maxlen)
+
+        result=[] 
+        carry=0 
+        i=maxlen-1
+        while(i>-1):
+            carry+=int(a[i])+int(b[i])
+            result.append(str(carry%2))
+            carry=carry//2 
+            i-=1
+        if carry==1:
+            result.append("1")
+        result.reverse()
+        return "".join(result)        
+
+if __name__ == "__main__":
+    # Create object of Solution
+    sol = Solution()
+
+    # Sample inputs
+    a = "1010"
+    b = "1011"
+
+    # Call the function
+    result = sol.addBinary(a, b)
+
+    # Print the result
+    print(f"Binary sum of {a} and {b} is: {result}")
