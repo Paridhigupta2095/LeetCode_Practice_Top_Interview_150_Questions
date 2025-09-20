@@ -1,0 +1,26 @@
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+
+        count=0
+        for _ in range(32):
+            lastbit = n&1
+            if lastbit==1:
+                count+=1
+            n=n>>1
+
+        return count
+
+        
+if __name__ == "__main__":
+    # Create an object of Solution
+    sol = Solution()
+
+    # Example input
+    n = 11  # Binary: 1011, has 3 ones
+
+    # Call the function
+    count_ones = sol.hammingWeight(n)
+
+    # Print the result
+    print(f"Number of 1's in binary representation of {n} is: {count_ones}")
+
