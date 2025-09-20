@@ -1,0 +1,42 @@
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        # binarynum=format(n,'032b')
+        # n=len(binarynum)
+        # r=[0]*n
+        # for i in range(0,n//2):
+        #     r[i],r[n-1-i]=binarynum[n-1-i],binarynum[i]
+        
+        # a="".join(r)
+        # print(a)
+        # return int(a,2)
+
+        result=0
+        for _ in range(32):
+            lastbit = n & 1
+            result=result<<1
+            result= result | lastbit
+            n=n>>1
+        return result
+
+
+if __name__ == "__main__":
+    # Create object of Solution
+    sol = Solution()
+
+    # Example input (32-bit integer)
+    n = 43261596  # Binary: 00000010100101000001111010011100
+
+    # Call the function
+    reversed_num = sol.reverseBits(n)
+
+    # Print results
+    print(f"Original number: {n}")
+    print(f"Original (32-bit binary): {format(n, '032b')}")
+    print(f"Reversed number: {reversed_num}")
+    print(f"Reversed (32-bit binary): {format(reversed_num, '032b')}")
+
+
+
+
+
+
