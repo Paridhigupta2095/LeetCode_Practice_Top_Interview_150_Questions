@@ -1,0 +1,25 @@
+from typing import List
+from collections import defaultdict
+
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        numbers = defaultdict(int)
+        for i in range(len(nums)):
+            numbers[nums[i]] += 1
+        for i, j in numbers.items():
+            if j == 1:
+                return i
+
+
+# ---------- DRIVER CODE ----------
+if __name__ == "__main__":
+    sol = Solution()
+
+    # Test cases
+    nums1 = [4, 1, 2, 1, 2]
+    nums2 = [2, 2, 3]
+    nums3 = [7, 7, 8, 8, 9]
+
+    print("Input:", nums1, "=> Single Number:", sol.singleNumber(nums1))  # Output: 4
+    print("Input:", nums2, "=> Single Number:", sol.singleNumber(nums2))  # Output: 3
+    print("Input:", nums3, "=> Single Number:", sol.singleNumber(nums3))  # Output: 9
