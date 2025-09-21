@@ -1,0 +1,21 @@
+class Solution:
+    def rangeBitwiseAnd(self, left: int, right: int) -> int:
+        count = 0
+        while right > left:
+            left = left >> 1
+            right = right >> 1
+            count += 1
+
+        r = left << count
+        print("Result after AND:", r)
+        return r
+
+
+# ---------- DRIVER CODE ----------
+if __name__ == "__main__":
+    sol = Solution()
+
+    # Test cases
+    print("Input: left=5, right=7 => Output:", sol.rangeBitwiseAnd(5, 7))   # Expected 4
+    print("Input: left=0, right=0 => Output:", sol.rangeBitwiseAnd(0, 0))   # Expected 0
+    print("Input: left=1, right=2147483647 => Output:", sol.rangeBitwiseAnd(1, 2147483647))  # Expected 0
