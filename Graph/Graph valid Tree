@@ -1,0 +1,58 @@
+from typing import List
+import collections
+
+class Solution:
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+
+        if len(edges) != n - 1: 
+            return False
+
+        adj = [[] for _ in range(n)]
+        for x, y in edges:
+            adj[x].append(y)
+            adj[y].append(x)
+
+        parent = {0: -1}
+        q = collections.deque([0])
+
+        while q:
+            node = q.popleft()
+            for neighbour in adj[node]:
+                if neighbour == parent[node]:
+                    continue
+                if neighbour in parent:
+                    return False
+                parent[neighbour] = node
+                q.append(neighbour)
+                
+        return len(parent) == n
+
+
+# ---------------- DRIVER CODE ----------------
+if __name__ == "__main__":
+    sol = Solution()
+
+    # ✅ Test 1: Valid Tree
+    n1 = 5
+    edges1 = [[0,1],[0,2],[0,3],[1,4]]
+    print("Test 1:", sol.validTree(n1, edges1))  # Expected: True
+
+    # ✅ Test 2: Contains a Cycle → Not a Tree
+    n2 = 5
+    edges2 = [[0,1],[1,2],[2,3],[1,3],[1,4]]
+    print("Test 2:", sol.validTree(n2, edges2))  # Expected: False
+
+    # ✅ Test 3: Not Fully Connected → Not a Tree
+    n3 = 4
+    edges3 = [[0,1],[2,3]]
+    print("Test 3:", sol.validTree(n3, edges3))  # Expected: False
+
+    # ✅ Test 4: Single Node Tree
+    n4 = 1
+    edges4 = []
+    print("Test 4:", sol.validTree(n4, edges4))  # Expected: True
+
+    # ✅ Test 5: Two Connected Nodes
+    n5 = 2
+    edges5 = [[0,1]]
+    print("Test 5:", sol.validTree(n5, edges5))  # Expected: True
