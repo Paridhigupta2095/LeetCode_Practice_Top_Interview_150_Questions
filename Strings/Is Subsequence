@@ -1,0 +1,34 @@
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        len_sub=len(s)
+        len_t=len(t)
+        j=0
+        c=0
+        for i in range(len_sub):
+            if c==len_sub:
+                return True
+            while j<len_t:
+                if(s[i]==t[j]):
+                    c+=1
+                    j+=1
+                    break
+                j+=1
+        return c==len_sub
+                
+
+        
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+
+    # Test cases
+    s1, t1 = "abc", "ahbgdc"   # True
+    s2, t2 = "axc", "ahbgdc"   # False
+    s3, t3 = "", "ahbgdc"      # True (empty string is subsequence of anything)
+    s4, t4 = "abc", ""         # False
+
+    print(sol.isSubsequence(s1, t1))  # Expected True
+    print(sol.isSubsequence(s2, t2))  # Expected False
+    print(sol.isSubsequence(s3, t3))  # Expected True
+    print(sol.isSubsequence(s4, t4))  # Expected False
+
