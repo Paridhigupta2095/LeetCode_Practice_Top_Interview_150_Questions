@@ -1,0 +1,21 @@
+import re
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        new_s=re.sub(r"[^a-z0-9]","",s.lower())
+        
+        reversed_s=new_s[::-1]
+        print("new_s",new_s,"reversed_s",reversed_s)
+        return reversed_s==new_s
+# Driver code
+if __name__ == "__main__":
+    sol = Solution()
+
+    # Test cases
+    s1 = "A man, a plan, a canal: Panama"   # Expected True
+    s2 = "race a car"                       # Expected False
+    s3 = " "                                # Expected True (empty string after cleaning)
+
+    print(sol.isPalindrome(s1))  # True
+    print(sol.isPalindrome(s2))  # False
+    print(sol.isPalindrome(s3))  # True
+
