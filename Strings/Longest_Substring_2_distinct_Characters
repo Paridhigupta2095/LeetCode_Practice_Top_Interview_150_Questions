@@ -1,0 +1,35 @@
+from collections import defaultdict
+
+class Solution:
+    def lengthOfLongestSubstringTwoDistinct(self, nums: str) -> int:
+        left = 0
+        right = 0
+        char = defaultdict(int)
+        maxlength = 0
+
+        while right < len(nums):
+            char[nums[right]] = right            
+
+            if len(char) == 3:
+                smallest_key = min(char, key=char.get)
+                left = char[smallest_key] + 1
+                del char[smallest_key]
+            
+            maxlength = max(maxlength, right - left + 1)
+            right += 1
+
+        return maxlength
+
+
+# ---------------- DRIVER CODE ----------------
+if __name__ == "__main__":
+    s = Solution()
+    
+    test_str = "eceba"
+    print(f"Input: {test_str}")
+    print("Longest substring with at most 2 distinct chars:", s.lengthOfLongestSubstringTwoDistinct(test_str))
+
+    # Another test
+    test_str = "ccaabbb"
+    print(f"\nInput: {test_str}")
+    print("Longest substring with at most 2 distinct chars:", s.lengthOfLongestSubstringTwoDistinct(test_str))
